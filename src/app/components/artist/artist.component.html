@@ -1,0 +1,22 @@
+<div class="jumbotron jumbotron-detalle">
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid" [src]="artista.images | noimage">
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4">{{ artista.name | uppercase }}</h1> 
+            <hr>
+            <ul>
+                <li> <span style="color: #1DB954">Link externo : </span><a href="{{artista.external_urls.spotify}}">Spotify</a></li>
+                <li> <span style="color: #1DB954">Followers : </span>{{artista.followers['total']}}</li>
+                <li><span style="color: #1DB954">Popilarity : </span>{{artista.popularity}}</li>
+            </ul>
+           
+           
+             
+            <h4>Generos</h4>
+            <span *ngFor="let genero of artista.genres" class="badge badge-pill badge-success">{{ genero }}</span>
+        </div>
+    </div>
+</div>
+<!-- [src]="artista.images[0].url" -->

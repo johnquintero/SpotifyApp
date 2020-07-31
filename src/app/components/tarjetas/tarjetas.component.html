@@ -1,0 +1,23 @@
+<div class="card-columns animated fadeIn">
+    <div *ngFor="let item of items" class="card">
+        <div *ngIf="padre=='search';else album" class="puntero">
+        <img class="card-img-top" [src] ="item.images | noimage" (click)="verArtista(item.id)" />
+        </div>
+        <ng-template #album>
+            <img class="card-img-top" [src] ="item.images | noimage" />
+        </ng-template>
+        <div class="card-body">
+            <div class="card-title">
+                <h5>{{ item.album_type }} {{ item.name }} </h5>
+            </div>
+            <div *ngIf="item.artists" class="card-text">
+                <span *ngFor="let artista of item.artists" class="badge badge-pill badge-success puntero" (click)="verArtista(artista.id)">{{ artista.name }}</span>
+            </div>
+            <div *ngIf="item.genres" class="card-text">
+                <span *ngFor="let genero of item.genres" class="badge badge-pill badge-success">{{ genero }}</span>
+            </div>
+            <div *ngIf="item.album_type" class="card-text"><small> Lanzamiento {{ item.release_date }}</small></div>
+        </div>
+    </div>
+</div>
+
