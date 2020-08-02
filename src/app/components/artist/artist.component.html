@@ -1,22 +1,42 @@
-<div class="jumbotron jumbotron-detalle">
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" [src]="artista.images | noimage">
+<app-loading *ngIf="loadingArtista" class="animated fadeIn"></app-loading>
+
+      <div class="row m-5">
+        <div class="col-2">
+          <img class="img-thumbnail img-fluid img-circle" [src]="artista.images | noimage">
         </div>
-        <div class="col-md-8">
-            <h1 class="display-4">{{ artista.name | uppercase }}</h1> 
-            <hr>
-            <ul>
-                <li> <span style="color: #1DB954">Link externo : </span><a href="{{artista.external_urls.spotify}}">Spotify</a></li>
-                <li> <span style="color: #1DB954">Followers : </span>{{artista.followers['total']}}</li>
-                <li><span style="color: #1DB954">Popilarity : </span>{{artista.popularity}}</li>
-            </ul>
-           
-           
-             
-            <h4>Generos</h4>
-            <span *ngFor="let genero of artista.genres" class="badge badge-pill badge-success">{{ genero }}</span>
+        <div class="col">
+          <h3 class="">{{ artista.name | uppercase }}</h3>
+
+          <ul>
+            <li> <a [href]="artista.external_urls.spotify"
+                target="_blank">ir a la pagina del artista</a></li>
+            <li> <span style="color: #1DB954">Followers : </span>{{artista.followers['total']}}</li>
+            <li><span style="color: #1DB954">Popilarity : </span>{{artista.popularity}}</li>
+          </ul>
+          <h4>Generos</h4>
+          <span *ngFor="let genero of artista.genres" class="badge badge-pill badge-success">{{ genero }}</span>
         </div>
-    </div>
+      </div>
+
+<div class="row">
+  <div class="col m-5">
+    <table class="table" style="color: white;">
+      <thead>
+        <tr>
+          <th scope="col">Foto</th>
+          <th scope="col">Album</th>
+          <th scope="col">Nombre</th>
+          <th scope="col"> Previa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cancion of canciones">
+          <td> <img [src]="cancion.album.images | noimage" class="img-fluids img-thumb" alt=""></td>
+          <td>{{ cancion.album.name }}</td>
+          <td>{{ cancion.name }}</td>
+          <td> <audio [src]="cancion.preview_url" controls></audio></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-<!-- [src]="artista.images[0].url" -->

@@ -11,15 +11,33 @@ import { ActivatedRoute } from '@angular/router';
 export class ArtistComponent implements OnInit {
 
   artista : any={};
+  canciones : any[] = [];
+  loadingArtista : boolean;
+
   constructor(private spotifyService : SpotifyService,
               private activeRoute : ActivatedRoute) {
-    
+    this.loadingArtista = true;
     this.activeRoute.params.subscribe( params => {
-      spotifyService.getArtista(params['id'])
-                    .subscribe( (data: any) => {
-                      this.artista = data});
+      this.getArtista( params['id']);
+      this.getArtistaTracks(params['id']);
     });
     
+  }
+
+  getArtista(id : string){
+    this.loadingArtista = true;
+    this.spotifyService.getArtista(id)
+    .subscribe( (artista) => {
+      this.artista = artista
+      this.loadingArtista = false;
+    });
+  }
+
+  getArtistaTracks(id : string){
+    this.spotifyService.getArtistaTracks(id).subscribe( tracks => {
+      console.log(tracks)
+      this.canciones =  tracks;
+    });
   }
 
   ngOnInit(): void {

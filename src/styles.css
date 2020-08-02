@@ -37,7 +37,8 @@ hr {
 }
 
 .jumbotron-detalle {
-    background-color: black;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(52,58,64,1) 39%, rgba(52,58,64,1) 67%, rgba(0,0,0,0.969625350140056) 100%);
 }
 
 
